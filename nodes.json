@@ -1,1 +1,107 @@
-{"node_1": {"node_count": 1, "type_count": 1, "type": "event", "depth": 0, "created": "2024-06-01 08:00:00", "expiration": null, "subject": "Alex", "predicate": "attended", "object": "photography workshop", "description": "Alex attended a nature photography workshop in the city park.", "embedding_key": "embedding_1", "importance": 8, "keywords": ["photography", "workshop", "nature"], "filling": []}, "node_2": {"node_count": 2, "type_count": 1, "type": "thought", "depth": 1, "created": "2024-06-01 19:00:00", "expiration": null, "subject": "Alex", "predicate": "thought", "object": "about new photography techniques", "description": "Reflecting on the new techniques learned during the workshop, considering how to apply them in future projects.", "embedding_key": "embedding_2", "importance": 7, "keywords": ["photography", "learning", "techniques"], "filling": ["node_1"]}, "node_3": {"node_count": 3, "type_count": 2, "type": "event", "depth": 0, "created": "2024-06-05 10:00:00", "expiration": null, "subject": "Alex", "predicate": "completed", "object": "software project", "description": "Alex completed a major software development project at work, delivering the final product to the client.", "embedding_key": "embedding_3", "importance": 9, "keywords": ["software", "project", "completion"], "filling": []}, "node_4": {"node_count": 4, "type_count": 2, "type": "thought", "depth": 1, "created": "2024-06-05 20:00:00", "expiration": null, "subject": "Alex", "predicate": "felt", "object": "relief and accomplishment", "description": "After delivering the project, Alex felt a sense of relief and accomplishment, thinking about the challenges overcome.", "embedding_key": "embedding_4", "importance": 6, "keywords": ["relief", "accomplishment", "project"], "filling": ["node_3"]}, "node_5": {"node_count": 5, "type_count": 3, "type": "event", "depth": 0, "created": "2024-06-10 16:00:00", "expiration": null, "subject": "Alex", "predicate": "explored", "object": "national park", "description": "Alex went on a weekend trip to explore a national park, taking photos of the wildlife and landscapes.", "embedding_key": "embedding_5", "importance": 8, "keywords": ["exploration", "photography", "nature", "trip"], "filling": []}}
+{
+    "node_1": {
+        "node_count": 1,
+        "type_count": 1,
+        "type": "event",
+        "depth": 0,
+        "created": "2024-06-01 08:00:00",
+        "expiration": null,
+        "subject": "Alex",
+        "predicate": "attended",
+        "object": "photography workshop",
+        "description": "Alex attended a nature photography workshop in the city park.",
+        "embedding_key": "embedding_1",
+        "importance": 8,
+        "keywords": [
+            "photography",
+            "workshop",
+            "nature"
+        ],
+        "filling": []
+    },
+    "node_2": {
+        "node_count": 2,
+        "type_count": 1,
+        "type": "thought",
+        "depth": 1,
+        "created": "2024-06-01 19:00:00",
+        "expiration": null,
+        "subject": "Alex",
+        "predicate": "thought",
+        "object": "about new photography techniques",
+        "description": "Reflecting on the new techniques learned during the workshop, considering how to apply them in future projects.",
+        "embedding_key": "embedding_2",
+        "importance": 7,
+        "keywords": [
+            "photography",
+            "learning",
+            "techniques"
+        ],
+        "filling": [
+            "node_1"
+        ]
+    },
+    "node_3": {
+        "node_count": 3,
+        "type_count": 2,
+        "type": "event",
+        "depth": 0,
+        "created": "2024-06-05 10:00:00",
+        "expiration": null,
+        "subject": "Alex",
+        "predicate": "completed",
+        "object": "software project",
+        "description": "Alex completed a major software development project at work, delivering the final product to the client.",
+        "embedding_key": "embedding_3",
+        "importance": 9,
+        "keywords": [
+            "software",
+            "project",
+            "completion"
+        ],
+        "filling": []
+    },
+    "node_4": {
+        "node_count": 4,
+        "type_count": 2,
+        "type": "thought",
+        "depth": 1,
+        "created": "2024-06-05 20:00:00",
+        "expiration": null,
+        "subject": "Alex",
+        "predicate": "felt",
+        "object": "relief and accomplishment",
+        "description": "After delivering the project, Alex felt a sense of relief and accomplishment, thinking about the challenges overcome.",
+        "embedding_key": "embedding_4",
+        "importance": 6,
+        "keywords": [
+            "relief",
+            "accomplishment",
+            "project"
+        ],
+        "filling": [
+            "node_3"
+        ]
+    },
+    "node_5": {
+        "node_count": 5,
+        "type_count": 3,
+        "type": "event",
+        "depth": 0,
+        "created": "2024-06-10 16:00:00",
+        "expiration": null,
+        "subject": "Alex",
+        "predicate": "explored",
+        "object": "national park",
+        "description": "Alex went on a weekend trip to explore a national park, taking photos of the wildlife and landscapes.",
+        "embedding_key": "embedding_5",
+        "importance": 8,
+        "keywords": [
+            "exploration",
+            "photography",
+            "nature",
+            "trip"
+        ],
+        "filling": []
+    }
+}
