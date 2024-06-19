@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import datetime
+import time
 from collections import deque
 
 import numpy as np
@@ -53,6 +54,8 @@ class RetrievalCodelet(cst.Codelet):
         if self._query_memory_mo.get_timestamp() <= self._last_process:
             return
 
+        self._last_process = time.time()
+
         memory_stream : deque = self._memory_stream_mo.get_info()
         
         importances = []
@@ -69,8 +72,13 @@ class RetrievalCodelet(cst.Codelet):
         query = {"timestamps":timestamps}
         result, _ = self._recency_scorer(query)
         recencies = result["scores"]
+ 
+        if isinstance(query_memory, str):
+            query_description = query_memory
+        else:
+            query_description = query_memory["description"]
 
-        query = {"query_memory":query_memory["description"], "embeddings":embeddings}
+        query = {"query_memory":query_description, "embeddings":embeddings}
         result, _ = self._relevance_scorer(query)
         relevances = result["scores"]
 
