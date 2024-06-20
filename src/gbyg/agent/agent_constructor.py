@@ -5,6 +5,7 @@ import cst_python as cst
 from .memory_input import memory_input_constructor
 from .summary import summary_description_generator_constructor
 from .retrieval import RetrievalCodelet
+from .reflection import QuestionGeneratorCodelet, InsightGeneratorCodelet
 
 def agent_constructor(mind:cst.Mind) -> None:
     memories_input = mind.create_memory_object("MemoriesInput", deque())
@@ -29,5 +30,26 @@ def agent_constructor(mind:cst.Mind) -> None:
     retrieval_codelet.add_input(query_memory)
     retrieval_codelet.add_input(memory_stream)
     retrieval_codelet.add_output(retrieved_memories)
-    
+
     mind.insert_codelet(retrieval_codelet)
+
+    ######################################################################################
+
+    # Create memory objects for questions and insights
+    generated_questions = mind.create_memory_object("GeneratedQuestions", [])
+    generated_insights = mind.create_memory_object("GeneratedInsights", [])
+    statements = mind.create_memory_object("Statements", [])
+
+    # Create and insert QuestionGeneratorCodelet
+    question_generator_codelet = QuestionGeneratorCodelet(memory_stream.get_name(),
+                                                          generated_questions.get_name())
+    question_generator_codelet.add_input(memory_stream)
+    question_generator_codelet.add_output(generated_questions)
+    mind.insert_codelet(question_generator_codelet)
+
+    # Create and insert InsightGeneratorCodelet
+    insight_generator_codelet = InsightGeneratorCodelet(statements.get_name(),
+                                                        generated_insights.get_name())
+    insight_generator_codelet.add_input(statements)
+    insight_generator_codelet.add_output(generated_insights)
+    mind.insert_codelet(insight_generator_codelet)   
