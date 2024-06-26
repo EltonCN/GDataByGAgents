@@ -10,7 +10,9 @@ class InsightGenerator(tp.BasicTool):
     _input_description = {"statements": "a list of statements/memory descriptions about the agent"}
 
     _system_message = '''You are an insight generator that outputs in JSON.
-The JSON must use the schema: {'insights': ['str', 'str', 'str', 'str', 'str']}. 
+The JSON must use the schema: {'insights': [{'insight':'str', 'because_of':['int', 'int']}, {'insight':'str', 'because_of':['int', 'int']}, ...]}. 
+
+Where 'insight' is the generated insight, and 'because_of' are the indexes of the statements used to generate the insight.
 
 Please use a valid JSON format.'''
 
@@ -18,7 +20,7 @@ Please use a valid JSON format.'''
 Statements about the agent:
 {statements}
 
-What 5 high-level insights can you infer from the above statements? (example format: insight (because of 1, 5, 3))'''
+What 5 high-level insights can you infer from the above statements?'''
 
     _return_description = {'insights': 'a list of five high-level insights'}
 
@@ -30,10 +32,3 @@ What 5 high-level insights can you infer from the above statements? (example for
                          system_message=self._system_message,
                          model_name=model_name,
                          json_mode=True)
-
-    def _execute(self, query: Dict[str, str], context: str) -> Tuple[Dict[str, TextLike], Dict[str, str]]:
-        result, return_description = super()._execute(query, context)
-        
-        insights = result["insights"]
-        
-        return {"insights": insights}, return_description
