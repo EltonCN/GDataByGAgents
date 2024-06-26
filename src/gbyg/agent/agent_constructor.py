@@ -15,6 +15,8 @@ def agent_constructor(mind:cst.Mind, importance_threshould:float|None=None) -> N
     agent_summary_description = mind.create_memory_object("AgentSummaryDescription", "")
     agent_info = mind.create_memory_object("AgentInfo", {"name":"", "age":0, "traits":""})
     agent_time = mind.create_memory_object("AgentTime", 0)
+    actual_place = mind.create_memory_object("ActualPlace", "")
+
 
     memory_input_constructor(mind, memories_input, memory_stream)
     summary_description_generator_constructor(mind, memory_stream, agent_info, 
