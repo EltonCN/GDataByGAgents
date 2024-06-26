@@ -37,8 +37,8 @@ class Environment:
 
                 query = {'name':object_name,
                         'place':place,
-                        'description':object["description"],
-                        'state':object["state"],
+                        'description':object_object["description"],
+                        'state':object_object["state"],
                         'actor':agent,
                         'action':action}
                 
