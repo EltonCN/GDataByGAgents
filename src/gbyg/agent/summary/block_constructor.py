@@ -6,6 +6,7 @@ from .summary_codelet import SummaryFunctionCodelet
 from .summary_trigger_codelet import SummaryTriggerCodelet
 from gbyg.agent.concat import TextConcatCodelet
 from gbyg.agent.retrieval import RetrievalCodelet
+from gbyg.agent.memory_stream import MemoryStream
 
 def summary_description_generator_constructor(mind:cst.Mind, 
                             memory_stream:cst.MemoryObject|None=None,
@@ -19,7 +20,7 @@ def summary_description_generator_constructor(mind:cst.Mind,
                             embedder_model:str|None=None) -> None:
     
     if memory_stream is None:
-        memory_stream = mind.create_memory_object("MemoryStream", [])
+        memory_stream = mind.create_memory_object("MemoryStream", MemoryStream())
     if agent_info is None:
         agent_info = mind.create_memory_object("AgentInfo", {"name":"", "age":0, "traits":""})
     if agent_summary_description is None:
@@ -42,13 +43,15 @@ def summary_description_generator_constructor(mind:cst.Mind,
         summary_memories[dimension] = summary_memory
 
     trigger_codelet = SummaryTriggerCodelet(agent_info.get_name(),
-                                                agent_time.get_name(),
-                                                query_memories["Characteristics"].get_name(),
-                                                query_memories["DailyOccupation"].get_name(),
-                                                query_memories["ProgressFeeling"].get_name(),
-                                                interval)
+                                            agent_time.get_name(),
+                                            memory_stream.get_name(),
+                                            query_memories["Characteristics"].get_name(),
+                                            query_memories["DailyOccupation"].get_name(),
+                                            query_memories["ProgressFeeling"].get_name(),
+                                            interval)
     trigger_codelet.add_input(agent_info)
     trigger_codelet.add_input(agent_time)
+    trigger_codelet.add_input(memory_stream)
     for dimension in dimensions:
         trigger_codelet.add_output(query_memories[dimension])
     
@@ -65,6 +68,7 @@ def summary_description_generator_constructor(mind:cst.Mind,
                                              embedder_model)
         retrieval_codelet.add_input(query_memories[dimension])
         retrieval_codelet.add_input(memory_stream)
+        retrieval_codelet.add_input(agent_time)
         retrieval_codelet.add_output(retrieved_memories[dimension])
 
         summary_codelet = SummaryFunctionCodelet(query_memories[dimension].get_name(), 

@@ -30,10 +30,3 @@ What are 3 most salient high-level questions we can answer about the subjects in
                          system_message=self._system_message,
                          model_name=model_name,
                          json_mode=True)
-        
-    def _execute(self, query: Dict[str, str], context: str) -> Tuple[Dict[str, TextLike], Dict[str, str]]:
-        result, return_description = super()._execute(query, context)
-        
-        questions = result["questions"]
-        
-        return {"questions": questions}, return_description

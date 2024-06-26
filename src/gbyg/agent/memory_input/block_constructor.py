@@ -6,6 +6,7 @@ import cst_python as cst
 
 from .embedder_codelet import EmbedderCodelet
 from .importance_scorer_codelet import MemoryImportanceScorerCodelet
+from gbyg.agent.memory_stream import MemoryStream
 
 def memory_input_constructor(mind:cst.Mind, 
                             memories_input:cst.MemoryObject|None=None, 
@@ -16,7 +17,7 @@ def memory_input_constructor(mind:cst.Mind,
     if memories_input is None:
         memories_input = mind.create_memory_object("MemoriesInput", deque())
     if memory_stream is None:
-        memory_stream = mind.create_memory_object("MemoryStream", [])
+        memory_stream = mind.create_memory_object("MemoryStream", MemoryStream())
 
     memories_to_score = mind.create_memory_object("MemoriesToScore", deque())
 

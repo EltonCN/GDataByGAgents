@@ -59,6 +59,8 @@ class RetrievalCodelet(cst.Codelet):
         if self._query_memory_mo.get_timestamp() <= self._last_process:
             return
 
+        self._last_process = self._query_memory_mo.get_timestamp()
+
         if not isinstance(all_queries, list):
             all_queries = [all_queries]
         
@@ -69,8 +71,6 @@ class RetrievalCodelet(cst.Codelet):
             if query_memory is None or query_memory == "":
                 return
             
-
-            self._last_process = time.time()
 
             memory_stream : deque = self._memory_stream_mo.get_info()
             
@@ -99,7 +99,9 @@ class RetrievalCodelet(cst.Codelet):
             relevances = result["scores"]
 
             scores = importances + recencies + relevances
-            indexes = np.argpartition(scores, -self._n)[-self._n:]
+
+            n = min(len(scores), self._n)
+            indexes = np.argpartition(scores, -n)[-n:]
             
             for i in indexes:
                 memory = memory_stream[i]
