@@ -43,13 +43,15 @@ def summary_description_generator_constructor(mind:cst.Mind,
         summary_memories[dimension] = summary_memory
 
     trigger_codelet = SummaryTriggerCodelet(agent_info.get_name(),
-                                                agent_time.get_name(),
-                                                query_memories["Characteristics"].get_name(),
-                                                query_memories["DailyOccupation"].get_name(),
-                                                query_memories["ProgressFeeling"].get_name(),
-                                                interval)
+                                            agent_time.get_name(),
+                                            memory_stream.get_name(),
+                                            query_memories["Characteristics"].get_name(),
+                                            query_memories["DailyOccupation"].get_name(),
+                                            query_memories["ProgressFeeling"].get_name(),
+                                            interval)
     trigger_codelet.add_input(agent_info)
     trigger_codelet.add_input(agent_time)
+    trigger_codelet.add_input(memory_stream)
     for dimension in dimensions:
         trigger_codelet.add_output(query_memories[dimension])
     

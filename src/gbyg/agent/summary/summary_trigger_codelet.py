@@ -8,6 +8,7 @@ class SummaryTriggerCodelet(cst.Codelet):
     def __init__(self, 
                  agent_info_memory_name:str | None=None, 
                  agent_time_memory_name:str | None=None, 
+                 memory_stream_name:str | None = None,
                  characteristics_query_memory_name:str | None=None,
                  daily_occupation_query_memory_name:str | None = None,
                  progress_feeling_query_memory_name:str | None = None,
@@ -18,6 +19,8 @@ class SummaryTriggerCodelet(cst.Codelet):
             agent_info_memory_name = "AgentInfo"
         if agent_time_memory_name is None:
             agent_time_memory_name = "AgentTime"
+        if memory_stream_name is None:
+            memory_stream_name = "MemoryStream"
         if characteristics_query_memory_name is None:
             characteristics_query_memory_name = "characteristics_query"
         if daily_occupation_query_memory_name is None:
@@ -27,6 +30,7 @@ class SummaryTriggerCodelet(cst.Codelet):
 
         self._agent_info_memory_name = agent_info_memory_name
         self._agent_time_memory_name = agent_time_memory_name
+        self._memory_stream_name = memory_stream_name
         self._characteristics_query_memory_name = characteristics_query_memory_name
         self._daily_occupation_query_memory_name = daily_occupation_query_memory_name
         self._progress_feeling_query_memory_name = progress_feeling_query_memory_name
@@ -40,6 +44,7 @@ class SummaryTriggerCodelet(cst.Codelet):
     def access_memory_objects(self) -> None:
         self._agent_info_memory_mo = self.get_input(name=self._agent_info_memory_name)
         self._agent_time_memory_mo = self.get_input(name=self._agent_time_memory_name)
+        self._memory_stream_mo = self.get_input(name=self._memory_stream_name)
         self._characteristics_query_memory_mo = self.get_output(name=self._characteristics_query_memory_name)
         self._daily_occupation_query_memory_mo = self.get_output(name=self._daily_occupation_query_memory_name)
         self._progress_feeling_query_memory_mo = self.get_output(name=self._progress_feeling_query_memory_name)
@@ -50,6 +55,7 @@ class SummaryTriggerCodelet(cst.Codelet):
     def proc(self) -> None:
         agent_time = self._agent_time_memory_mo.get_info()
         agent_info = self._agent_info_memory_mo.get_info()
+        memory_stream = self._memory_stream_mo.get_info()
 
         if agent_time is None or agent_time == "":
             return
@@ -57,6 +63,9 @@ class SummaryTriggerCodelet(cst.Codelet):
             return
         
         if agent_info is None or agent_info == "":
+            return
+        
+        if memory_stream is None or memory_stream == "" or len(memory_stream) == 0:
             return
 
         self._last_process = agent_time
