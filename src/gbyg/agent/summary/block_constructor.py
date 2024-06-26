@@ -58,6 +58,7 @@ def summary_description_generator_constructor(mind:cst.Mind,
 
         retrieval_codelet = RetrievalCodelet(query_memories[dimension].get_name(),
                                              memory_stream.get_name(),
+                                             agent_time.get_name(),
                                              retrieved_memories[dimension].get_name(),
                                              n_to_retrieve,
                                              decay_factor,
