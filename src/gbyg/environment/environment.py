@@ -32,7 +32,12 @@ class Environment:
             target_result, _ = self._action_target_selector(query)
 
             for object_name in target_result["objects"]:
-                place = next(iter(get_object_room(self._environment_tree, object_name).keys()))
+                room = get_object_room(self._environment_tree, object_name)
+
+                if room is None:
+                    continue
+
+                place = next(iter(room.keys()))
                 object_object = get_object(self._environment_tree, object_name)
 
                 query = {'name':object_name,

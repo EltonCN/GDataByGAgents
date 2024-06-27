@@ -27,7 +27,7 @@ Please use a valid JSON format.'''
     _base_prompt = '''Know world tree: {know_world_tree}
 
 Considering the above know world, and the bellow information, what should be {name} action?
-Prefer to continue doing the current action. Also prefer to stay in the current area if the activity can be done there.
+Prefer to stay in the current area if the activity can be done there.
 
 Current state: {state}
 Current observation: {observation}

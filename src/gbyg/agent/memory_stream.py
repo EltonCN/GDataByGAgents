@@ -38,6 +38,9 @@ class MemoryStream(list):
         else:
             self._last_index = max(int(item["index"]), self._last_index)
 
+        if "last_acessed" not in item:
+            item["last_acessed"] = item["created"]
+
         return item
 
     def __setitem__(self, index, item):
