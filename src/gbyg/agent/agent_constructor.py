@@ -7,6 +7,7 @@ import cst_python as cst
 from .memory_input import memory_input_constructor
 from .summary import summary_description_generator_constructor
 from .reflection import reflection_constructor
+from .plan_reaction import plan_reaction_generator_constructor
 from .memory_stream import MemoryStream
 
 from .plan_reaction import EntityInfererCodelet
@@ -18,6 +19,7 @@ def agent_constructor(mind:cst.Mind, importance_threshould:float|None=None) -> N
     agent_info = mind.create_memory_object("AgentInfo", {"name":"", "age":0, "traits":""})
     agent_time = mind.create_memory_object("AgentTime", 0)
     actual_place = mind.create_memory_object("ActualPlace", "")
+    previous_day_summary = mind.create_memory_object("PreviousDaySummary", "")
 
 
     memory_input_constructor(mind, memories_input, memory_stream)
@@ -25,11 +27,13 @@ def agent_constructor(mind:cst.Mind, importance_threshould:float|None=None) -> N
                                               agent_time, agent_summary_description, 
                                               n_to_retrieve=2)
     reflection_constructor(mind, memories_input, memory_stream, agent_time, importance_threshould)
+    plan_reaction_generator_constructor(mind, memory_stream, agent_info, agent_time, 
+                                        agent_summary_description, previous_day_summary)
     
 
-    infered_entities = mind.create_memory_object("InferedEntities", [])
-    entity_inferer_codelet = EntityInfererCodelet(memory_stream.get_name(),
-                                                  infered_entities.get_name())
-    entity_inferer_codelet.add_input(memory_stream)
-    entity_inferer_codelet.add_output(infered_entities)
-    mind.insert_codelet(entity_inferer_codelet) 
+    #infered_entities = mind.create_memory_object("InferedEntities", [])
+    #entity_inferer_codelet = EntityInfererCodelet(memory_stream.get_name(),
+    #                                              infered_entities.get_name())
+    #entity_inferer_codelet.add_input(memory_stream)
+    #entity_inferer_codelet.add_output(infered_entities)
+    #mind.insert_codelet(entity_inferer_codelet) 

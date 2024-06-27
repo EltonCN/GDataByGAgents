@@ -4,6 +4,7 @@ import cst_python as cst
 
 from .summary_codelet import SummaryFunctionCodelet
 from .summary_trigger_codelet import SummaryTriggerCodelet
+from .summary_generator_codelet import SummaryGeneratorCodelet
 from gbyg.agent.concat import TextConcatCodelet
 from gbyg.agent.retrieval import RetrievalCodelet
 from gbyg.agent.memory_stream import MemoryStream
@@ -88,7 +89,10 @@ def summary_description_generator_constructor(mind:cst.Mind,
     for dimension in dimensions:
         memories_to_concat.append(summary_memories[dimension])
 
-    concat_codelet = TextConcatCodelet(agent_summary_description.get_name(), "\n")
+    concat_codelet = SummaryGeneratorCodelet(agent_info.get_name(),
+                                             agent_time.get_name(),
+                                            agent_summary_description.get_name(), "\n")
+    concat_codelet.add_input(agent_time)
     concat_codelet.add_output(agent_summary_description)
     for memory in memories_to_concat:
         concat_codelet.add_input(memory)
