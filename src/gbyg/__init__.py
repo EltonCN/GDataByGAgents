@@ -1,1 +1,1 @@
-from . import agent, environment
+from . import agent, environment, sensors

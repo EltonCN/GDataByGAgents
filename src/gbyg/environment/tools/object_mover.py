@@ -55,7 +55,7 @@ class ObjectMover(tp.Tool):
         for place in [origin_place, target_place]:
             if place is None:
                 warnings.warn(f"Place {place} not found. Aborting change.")
-                return
+                return {'environment_tree':environment_tree}, self._return_description 
             
         for index, origin_object in enumerate(origin_place):
             if origin_object["name"] == object_name:
@@ -65,7 +65,7 @@ class ObjectMover(tp.Tool):
 
         if origin_object is None:
             warnings.warn(f"Origin object {object_name} not found in {original_place_name}. Aborting change.")
-            return
+            return {'environment_tree':environment_tree}, self._return_description 
         
         del origin_place[index]
 

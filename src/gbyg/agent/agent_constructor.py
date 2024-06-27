@@ -20,6 +20,7 @@ def agent_constructor(mind:cst.Mind, importance_threshould:float|None=None) -> N
     agent_time = mind.create_memory_object("AgentTime", 0)
     actual_place = mind.create_memory_object("ActualPlace", "")
     previous_day_summary = mind.create_memory_object("PreviousDaySummary", "")
+    known_world = mind.create_memory_object("KnownWorld", {})
 
 
     memory_input_constructor(mind, memories_input, memory_stream)
@@ -28,7 +29,8 @@ def agent_constructor(mind:cst.Mind, importance_threshould:float|None=None) -> N
                                               n_to_retrieve=2)
     reflection_constructor(mind, memories_input, memory_stream, agent_time, importance_threshould)
     plan_reaction_generator_constructor(mind, memory_stream, agent_info, agent_time, 
-                                        agent_summary_description, previous_day_summary)
+                                        agent_summary_description, previous_day_summary,
+                                        known_world, actual_place)
     
 
     #infered_entities = mind.create_memory_object("InferedEntities", [])
