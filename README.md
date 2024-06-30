@@ -4,7 +4,7 @@ Simulation of virtual agents, worlds and sensors using LLMs.
 
 ## Usage
 
-The [Main.ipynb](Main.ipynb) shows the process of starting an agent and simulation world. 
+The [Main.ipynb](Main.ipynb) notebook shows the process of starting an agent and simulation world, and the [Analisys.ipynb](Analisys.ipynb) notebook shows some data processing that can be done with the simulation results.
 
 An example of data to create the simulation is available at [Generative Data by Generative Agents - First Simulation Data ![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.12601359.svg)](https://doi.org/10.5281/zenodo.12601359).
 
