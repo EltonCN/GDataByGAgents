@@ -1,5 +1,8 @@
 *.code-workspace
-
+temp/
+data/
+logs/
+output/
 
 
 # Byte-compiled / optimized / DLL files

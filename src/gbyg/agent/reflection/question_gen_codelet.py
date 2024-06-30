@@ -63,7 +63,7 @@ class QuestionGeneratorCodelet(cst.Codelet):
         descriptions = [m["description"] for m in memories]
         statements = "\n".join(descriptions)
         query = {"memories": statements}
-        result, _ = self._question_generator._execute(query, context="")
+        result, _ = self._question_generator(query, context="")
         questions = result["questions"]
 
         agent_time = self._agent_time_mo.get_info()
